@@ -1,1 +1,1 @@
-export const prefix = "!gb:";
+export const prefix = "!bank ";
