@@ -3,6 +3,7 @@ import {Account} from "../models/account";
 import {createHttpClient} from "./http-client";
 import {AxiosInstance} from "axios";
 import {ItemWithQuantity} from "../models/item";
+import * as fs from "fs";
 
 export class ApiRequest {
     public forAccount(account: Account) {
@@ -35,17 +36,22 @@ export class AccountRequest {
 
     public async getItems(): Promise<ItemWithQuantity[]> {
         const characters = await this.getCharacters();
+        const associations = this.getAltMainAssociations();
         const itemsDictionary: { [id: string]: ItemWithQuantity } = {};
 
         characters.forEach(c => {
             c.bags.forEach(b => {
                 b.bagSlots.forEach(bs => {
+                    const name = (
+                        associations.hasOwnProperty(c.name) ?
+                        c.name + " (" + associations[c.name] + ")" : ""
+                    )
                     if (!itemsDictionary[bs.item.id]) {
-                        itemsDictionary[bs.item.id] = {...bs.item, quantity: bs.quantity, characters: c.name};
+                        itemsDictionary[bs.item.id] = {...bs.item, quantity: bs.quantity, characters: name};
                     } else {
                         itemsDictionary[bs.item.id].quantity += bs.quantity;
-                        if (!itemsDictionary[bs.item.id].characters.includes(c.name)) {
-                            itemsDictionary[bs.item.id].characters += `, ${c.name}`;
+                        if (!itemsDictionary[bs.item.id].characters.includes(name)) {
+                            itemsDictionary[bs.item.id].characters += `, ${name}`;
                         }
                     }
                 });
@@ -72,5 +78,15 @@ export class AccountRequest {
     private async getPublicCharacters(): Promise<Character[]> {
         let content = await this.httpClient.get(`/guild/GetFromReadonlyToken/${this.account.classicGuildBankId}`);
         return content.data.characters;
+    }
+
+    private getAltMainAssociations() {
+        const contents = fs.readFileSync("doc/alt_main_associations.txt").split('\n');
+        const associations = {};
+        contents.forEach(a => {
+            const pair = a.split(":");
+            associations[pair[0]] = pair[1];
+        });
+        return associations;
     }
 }
