@@ -44,7 +44,9 @@ export class AccountRequest {
                         itemsDictionary[bs.item.id] = {...bs.item, quantity: bs.quantity, characters: c.name};
                     } else {
                         itemsDictionary[bs.item.id].quantity += bs.quantity;
-                        itemsDictionary[bs.item.id].characters += c.name;
+                        if (!itemsDictionary[bs.item.id].characters.search(c.name)) {
+                            itemsDictionary[bs.item.id].characters += `, ${c.name}`;
+                        }
                     }
                 });
             });
