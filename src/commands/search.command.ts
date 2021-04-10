@@ -29,7 +29,7 @@ export class SearchCommand extends BaseCommand {
         const responseMsg = new Discord.RichEmbed().setTitle(`Guild Bank Inventory - Search Result for '${searchString}'`);
         result.forEach(r => {
             responseMsg.addField(`${r.name} [Id: ${r.id}]`, `${r.quantity}x`);
-            responseMsg.setImage(`https://wow.zamimg.com/images/wow/icons/large/${r.icon}.jpg`)
+            responseMsg.setThumbnail(`https://wow.zamimg.com/images/wow/icons/large/${r.icon}.jpg`)
         });
         await message.channel.send(responseMsg);
     }
