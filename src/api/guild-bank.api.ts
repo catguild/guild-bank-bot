@@ -44,10 +44,11 @@ export class AccountRequest {
                         itemsDictionary[bs.item.id] = {...bs.item, quantity: bs.quantity, characters: c.name};
                     } else {
                         itemsDictionary[bs.item.id].quantity += bs.quantity;
-                        console.log(c.name);
                         if (!itemsDictionary[bs.item.id].characters.includes(c.name)) {
-                            console.log("in the if not includes c.name");
-                            itemsDictionary[bs.item.id].characters.concat(`, ${c.name}`);
+                            console.log(`in the if not includes c.name for ${c.name}! characters is ${itemsDictionary[bs.item.id].characters}`);
+                            itemsDictionary[bs.item.id].characters = itemsDictionary[bs.item.id].characters.concat(`, ${c.name}`);
+                            console.log(`now characters is ${itemsDictionary[bs.item.id].characters}`);
+
                         }
                     }
                 });
