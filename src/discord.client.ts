@@ -14,7 +14,7 @@ export const createDiscordClient = async () => {
     });
 
     client.on("guildCreate", async (guild: Account) => {
-        await guild.owner.send('Thanks! You can use `!gb:help` to discover commands.');
+        await guild.owner.send('Thanks! You can use `' + prefix + ' help` to discover commands.');
         console.log(`New guild joined: ${guild.name} (id: ${guild.id}). This guild has ${guild.memberCount} members!`);
     });
 
@@ -24,15 +24,18 @@ export const createDiscordClient = async () => {
         }
         const args: string[] = msg.content.slice(prefix.length).split(/ +/);
         const command = args.shift().toLowerCase();
-        if (!(await client.commands.has(command))) {
-            console.log(`Command: ${command} not found, display help.`);
-            client.commands.get("help").execute(msg, args);
-            return;
-        }
         try {
-            const commandHandler = client.commands.get(command);
-            console.log(`Execute: ${commandHandler.name} with args "${args}"`);
-            await commandHandler.execute(msg, args);
+            if (await client.commands.has(command)) {
+                const commandHandler = client.commands.get(command);
+                console.log(`Execute: ${commandHandler.name} with args "${args}"`);
+                await commandHandler.execute(msg, args);
+            } else if (args) {
+                console.log(`No command, using search.`);
+                client.commands.get("search").execute(msg, args);
+            } else {
+                console.log(`Command: ${command} not found, display help.`);
+                client.commands.get("help").execute(msg, args);
+            }
         } catch (error) {
             console.error(error);
             await msg.reply('there was an error trying to execute that command!');
