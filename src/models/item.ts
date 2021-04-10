@@ -10,4 +10,5 @@ export interface Item {
 
 export interface ItemWithQuantity extends Item {
     quantity: number;
+    characters: string;
 }

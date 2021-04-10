@@ -41,9 +41,10 @@ export class AccountRequest {
             c.bags.forEach(b => {
                 b.bagSlots.forEach(bs => {
                     if (!itemsDictionary[bs.item.id]) {
-                        itemsDictionary[bs.item.id] = {...bs.item, quantity: bs.quantity};
+                        itemsDictionary[bs.item.id] = {...bs.item, quantity: bs.quantity, characters: c.name};
                     } else {
                         itemsDictionary[bs.item.id].quantity += bs.quantity;
+                        itemsDictionary[bs.item.id].characters += c.name;
                     }
                 });
             });
