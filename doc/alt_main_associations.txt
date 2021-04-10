@@ -1,2 +1,3 @@
 nightfur:Arala
+nightscale:Arala
 nightraid:Khendi
