@@ -24,6 +24,8 @@ export class SearchCommand extends BaseCommand {
             await message.channel.send(`No search result for '${searchString}'`);
             return;
         }
+        console.log(`searched for: ${searchString}`);
+        console.log(result);
         const responseMsg = new Discord.RichEmbed().setTitle(`Guild Bank Inventory - Search Result for '${searchString}'`);
         result.forEach(r => {
             responseMsg.addField(`${r.name} [Id: ${r.id}]`, `${r.quantity}x`);
