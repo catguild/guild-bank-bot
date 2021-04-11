@@ -54,6 +54,7 @@ export class AccountRequest {
                 });
             });
         });
+        console.log(itemsDictionary);
 
         return Object.keys(itemsDictionary)
             .map(r => [itemsDictionary][r])
