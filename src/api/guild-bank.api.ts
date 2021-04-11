@@ -44,7 +44,7 @@ export class AccountRequest {
                 b.bagSlots.forEach(bs => {
                     const name = (
                         associations.hasOwnProperty(c.name) ?
-                        c.name + " (" + associations[c.name] + ")" : ""
+                        c.name + " (" + associations[c.name] + ")" : "jfgjgjgj"
                     );
                     if (!itemsDictionary[bs.item.id]) {
                         itemsDictionary[bs.item.id] = {...bs.item, quantity: bs.quantity, characters: name};
