@@ -62,7 +62,12 @@ export class AccountRequest {
                 });
             });
         });
-        console.log(itemsDictionary[4]);
+        let i = 0;
+        for (let key in itemsDictionary) {
+            console.log(itemsDictionary[key]);
+            if(i>6) break;
+            i++;
+        }
 
         return Object.keys(itemsDictionary)
             .map(r => [itemsDictionary][r])
