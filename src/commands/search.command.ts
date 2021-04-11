@@ -18,7 +18,7 @@ export class SearchCommand extends BaseCommand {
         const account = await this.getAccount();
         const items = await new ApiRequest().forAccount(account).getItems();
         const result = items.filter(i => {
-            return i[0].name.toLowerCase().includes(searchString.toLowerCase()) || i.id.toString() == searchString;
+            return i[0].name.toLowerCase().includes(searchString.toLowerCase()) || i[0].id.toString() == searchString;
         });
         if (result.length === 0) {
             await message.channel.send(`No search result for '${searchString}'`);
