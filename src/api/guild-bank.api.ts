@@ -82,15 +82,13 @@ export class AccountRequest {
     }
 
     private getAltMainAssociations() {
-        /*
-        const contents = fs.readFileSync("doc/alt_main_associations.txt").split('\n');
+        //const contents = fs.readFileSync("doc/alt_main_associations.txt").split('\n');
+        const contents = "nightfur:Arala\nnightscale:Arala\nnightraid:Khendi".split('\n');
         const associations = {};
         contents.forEach(a => {
             const pair = a.split(":");
             associations[pair[0]] = pair[1];
         });
         return associations;
-        */
-       return {"nightfur":"Arala", "nightraid":"Khendi"};
     }
 }
