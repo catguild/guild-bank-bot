@@ -44,7 +44,7 @@ export class AccountRequest {
             c.bags.forEach(b => {
                 b.bagSlots.forEach(bs => {
                     const name = (
-                        associations.hasOwnProperty(c.name) ?
+                        associations.has(c.name) ?
                         c.name + " (" + associations[c.name] + ")" : "jgjgjg"
                     );
                     if (!itemsDictionary[bs.item.id]) {
@@ -84,10 +84,10 @@ export class AccountRequest {
     private getAltMainAssociations() {
         //const contents = fs.readFileSync("doc/alt_main_associations.txt").split('\n');
         const contents = "nightfur:Arala\nnightscale:Arala\nnightraid:Khendi".split('\n');
-        const associations = {};
+        let associations = new Map();
         contents.forEach(a => {
             const pair = a.split(":");
-            associations[pair[0]] = pair[1];
+            associations.set(pair[0], pair[1]);
         });
         return associations;
     }
