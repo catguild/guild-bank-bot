@@ -89,7 +89,7 @@ export class AccountRequest {
         let associations = new Map();
         contents.forEach(a => {
             const pair = a.split(":");
-            associations.set(pair[0], pair[1]);
+            associations.set(pair[0].toLowerCase(), pair[1]);
         });
         return associations;
     }
