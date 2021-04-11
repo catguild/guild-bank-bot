@@ -3,7 +3,7 @@ import {Account} from "../models/account";
 import {createHttpClient} from "./http-client";
 import {AxiosInstance} from "axios";
 import {ItemWithQuantity} from "../models/item";
-import * as fs from "fs";
+//import * as fs from "fs";
 
 export class ApiRequest {
     public forAccount(account: Account) {
@@ -81,6 +81,7 @@ export class AccountRequest {
     }
 
     private getAltMainAssociations() {
+        /*
         const contents = fs.readFileSync("doc/alt_main_associations.txt").split('\n');
         const associations = {};
         contents.forEach(a => {
@@ -88,5 +89,7 @@ export class AccountRequest {
             associations[pair[0]] = pair[1];
         });
         return associations;
+        */
+       return "nightfur:Arala\nnightraid:Khendi"
     }
 }
