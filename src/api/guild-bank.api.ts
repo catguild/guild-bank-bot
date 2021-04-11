@@ -37,6 +37,7 @@ export class AccountRequest {
     public async getItems(): Promise<ItemWithQuantity[]> {
         const characters = await this.getCharacters();
         const associations = this.getAltMainAssociations();
+        console.log(associations);
         const itemsDictionary: { [id: string]: ItemWithQuantity } = {};
 
         characters.forEach(c => {
