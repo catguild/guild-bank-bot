@@ -91,6 +91,6 @@ export class AccountRequest {
         });
         return associations;
         */
-       return "nightfur:Arala\nnightraid:Khendi"
+       return {"nightfur":"Arala", "nightraid":"Khendi"};
     }
 }
