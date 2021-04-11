@@ -50,13 +50,16 @@ export class AccountRequest {
                     // );
                     let name = "";
                     if(associations.has(c.name.toLowerCase())) {
-                        name = c.name + " (" + associations[c.name] + ")";
+                        name = c.name + " (" + associations.get(c.name) + ")";
                         console.log("MATCHED("+i+"): " + name);
                     } else {
                         name = (c.name + "::" + c.name.toLowerCase());
                         console.log("OVERWRITTEN("+i+"): " + name);
                     }
                     if (!itemsDictionary[bs.item.id]) {
+                        if(!name.includes("::")) {
+                            console.log("TRYING TO ADD MATCHED NAME: " + name);
+                        }
                         itemsDictionary[bs.item.id] = {...bs.item, quantity: bs.quantity, characters: name};
                     } else {
                         itemsDictionary[bs.item.id].quantity += bs.quantity;
