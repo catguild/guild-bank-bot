@@ -37,29 +37,16 @@ export class AccountRequest {
     public async getItems(): Promise<ItemWithQuantity[]> {
         const characters = await this.getCharacters();
         const associations = this.getAltMainAssociations();
-        console.log(associations);
         const itemsDictionary: { [id: string]: ItemWithQuantity } = {};
 
-        let i = 0;
         characters.forEach(c => {
             c.bags.forEach(b => {
                 b.bagSlots.forEach(bs => {
-                    // const name = (
-                    //     associations.has(c.name.toLowerCase()) ?
-                    //     (c.name + " (" + associations[c.name] + ")") : (c.name + "::" + c.name.toLowerCase())
-                    // );
-                    let name = "";
-                    if(associations.has(c.name.toLowerCase())) {
-                        name = c.name + " (" + associations.get(c.name.toLowerCase()) + ")";
-                        console.log("MATCHED("+i+"): " + name);
-                    } else {
-                        name = (c.name + "::" + c.name.toLowerCase());
-                        console.log("OVERWRITTEN("+i+"): " + name);
-                    }
+                    const name = (
+                        associations.has(c.name.toLowerCase()) ?
+                        c.name + " (" + associations.get(c.name.toLowerCase()) + ")" : c.name
+                    );
                     if (!itemsDictionary[bs.item.id]) {
-                        if(!name.includes("::")) {
-                            console.log("TRYING TO ADD MATCHED NAME: " + name);
-                        }
                         itemsDictionary[bs.item.id] = {...bs.item, quantity: bs.quantity, characters: name};
                     } else {
                         itemsDictionary[bs.item.id].quantity += bs.quantity;
@@ -67,7 +54,6 @@ export class AccountRequest {
                             itemsDictionary[bs.item.id].characters += `, ${name}`;
                         }
                     }
-                    i++;
                 });
             });
         });
