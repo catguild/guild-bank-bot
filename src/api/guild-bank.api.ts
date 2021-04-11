@@ -40,6 +40,7 @@ export class AccountRequest {
         console.log(associations);
         const itemsDictionary: { [id: string]: ItemWithQuantity } = {};
 
+        let i = 0;
         characters.forEach(c => {
             c.bags.forEach(b => {
                 b.bagSlots.forEach(bs => {
@@ -50,9 +51,10 @@ export class AccountRequest {
                     let name = "";
                     if(associations.has(c.name.toLowerCase())) {
                         name = c.name + " (" + associations[c.name] + ")";
-                        console.log("OVERWRITTEN");
+                        console.log("MATCHED("+i+"): " + name);
                     } else {
                         name = (c.name + "::" + c.name.toLowerCase());
+                        console.log("OVERWRITTEN("+i+"): " + name);
                     }
                     if (!itemsDictionary[bs.item.id]) {
                         itemsDictionary[bs.item.id] = {...bs.item, quantity: bs.quantity, characters: name};
@@ -62,6 +64,7 @@ export class AccountRequest {
                             itemsDictionary[bs.item.id].characters += `, ${name}`;
                         }
                     }
+                    i++;
                 });
             });
         });
