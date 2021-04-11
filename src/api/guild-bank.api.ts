@@ -50,9 +50,9 @@ export class AccountRequest {
                     let name = "";
                     if(associations.has(c.name.toLowerCase())) {
                         name = c.name + " (" + associations[c.name] + ")";
+                        console.log("OVERWRITTEN");
                     } else {
                         name = (c.name + "::" + c.name.toLowerCase());
-
                     }
                     if (!itemsDictionary[bs.item.id]) {
                         itemsDictionary[bs.item.id] = {...bs.item, quantity: bs.quantity, characters: name};
