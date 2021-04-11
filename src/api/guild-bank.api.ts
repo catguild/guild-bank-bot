@@ -43,11 +43,11 @@ export class AccountRequest {
         characters.forEach(c => {
             c.bags.forEach(b => {
                 b.bagSlots.forEach(bs => {
-                    console.log(c.name.toLowerCase());
+                    console.log(c.name);
                     console.log(associations.has(c.name));
                     const name = (
                         associations.has(c.name.toLowerCase()) ?
-                        c.name + " (" + associations[c.name] + ")" : c.name + "::" + c.name.toLowerCase();
+                        (c.name + " (" + associations[c.name] + ")") : (c.name + "::" + c.name.toLowerCase())
                     );
                     if (!itemsDictionary[bs.item.id]) {
                         itemsDictionary[bs.item.id] = {...bs.item, quantity: bs.quantity, characters: name};
