@@ -50,7 +50,7 @@ export class AccountRequest {
                     // );
                     let name = "";
                     if(associations.has(c.name.toLowerCase())) {
-                        name = c.name + " (" + associations.get(c.name) + ")";
+                        name = c.name + " (" + associations.get(c.name.toLowerCase()) + ")";
                         console.log("MATCHED("+i+"): " + name);
                     } else {
                         name = (c.name + "::" + c.name.toLowerCase());
@@ -100,7 +100,6 @@ export class AccountRequest {
         let associations = new Map();
         contents.forEach(a => {
             const pair = a.split(":");
-            console.log(pair);
             associations.set(pair[0].toLowerCase(), pair[1]);
         });
         return associations;
