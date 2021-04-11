@@ -49,12 +49,20 @@ export class AccountRequest {
                     if (!itemsDictionary[bs.item.id]) {
                         itemsDictionary[bs.item.id] = [{...bs.item, quantity: bs.quantity, characters: name}]; //must start with an item
                     } else {
-                        itemsDictionary[bs.item.id].push({...bs.item, quantity: bs.quantity, characters: name})
+                        let characterFound = false;
+                        itemsDictionary[bs.item.id].forEach(c => {
+                            if(c.characters.toLowerCase() === name.toLowerCase()) {
+                                c.quantity += bs.quantity;
+                                characterFound = true;
+                            }
+                        });
+                        if(!characterFound) itemsDictionary[bs.item.id].push({...bs.item, quantity: bs.quantity, characters: name});
+                        
                     }
                 });
             });
         });
-        console.log(itemsDictionary);
+        console.log(itemsDictionary[4]);
 
         return Object.keys(itemsDictionary)
             .map(r => [itemsDictionary][r])
