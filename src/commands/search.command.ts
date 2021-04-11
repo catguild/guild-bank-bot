@@ -29,7 +29,7 @@ export class SearchCommand extends BaseCommand {
             let line = "";
             r.forEach(e => {
                 responseMsg.setThumbnail(`https://wow.zamimg.com/images/wow/icons/large/${e.icon}.jpg`);
-                line += `${e.quantity}x on ${e.characters} | [Link](https://classic.wowhead.com/item=${e.id})\n`;
+                line += `${e.quantity}x on ${e.characters} | [Item Link](https://classic.wowhead.com/item=${e.id})\n`;
             });
             responseMsg.addField(`${r[0].name}`, line);
         });
