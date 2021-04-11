@@ -26,7 +26,7 @@ export class SearchCommand extends BaseCommand {
         }
         const responseMsg = new Discord.RichEmbed().setTitle(`Guild Bank Inventory - Search Result for '${searchString}'`);
         result.forEach(r => {
-            responseMsg.addField(`${r.name}`, `${r.quantity}x total found on ${r.characters} \n https://classic.wowhead.com/item=${r.id}`);
+            responseMsg.addField(`${r.quantity}x`, `[${r.name}](https://classic.wowhead.com/item=${r.id}) \n ${r.characters}`);
             responseMsg.setThumbnail(`https://wow.zamimg.com/images/wow/icons/large/${r.icon}.jpg`);
         });
         await message.channel.send(responseMsg);
