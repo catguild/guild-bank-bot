@@ -71,7 +71,7 @@ export class AccountRequest {
 
         return Object.keys(itemsDictionary)
             .map(r => itemsDictionary[r])
-            //.sort((a, b) => a[0].name.toLowerCase().localeCompare(b[0].name.toLowerCase()));
+            .sort((a, b) => a[0].name.toLowerCase().localeCompare(b[0].name.toLowerCase()));
     }
 
     public getCharacters(): Promise<Character[]> {
