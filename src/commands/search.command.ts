@@ -18,7 +18,7 @@ export class SearchCommand extends BaseCommand {
         const account = await this.getAccount();
         const items = await new ApiRequest().forAccount(account).getItems();
         const result = items.filter(i => {
-            return i.name.toLowerCase().includes(searchString.toLowerCase()) || i.id.toString() == searchString;
+            return i[0].name.toLowerCase().includes(searchString.toLowerCase()) || i.id.toString() == searchString;
         });
         if (result.length === 0) {
             await message.channel.send(`No search result for '${searchString}'`);
@@ -26,10 +26,12 @@ export class SearchCommand extends BaseCommand {
         }
         const responseMsg = new Discord.RichEmbed().setTitle(`Guild Bank Inventory - Search Result for '${searchString}'`);
         result.forEach(r => {
-            //responseMsg.addField(`${r.name} [Id: ${r.id}] on ${r.characters}`, `${r.quantity}x`);
-            responseMsg.addField(`${r.name}`, `**${r.quantity}x | ${r.characters} | [Link](https://classic.wowhead.com/item=${r.id})**`);
-            responseMsg.setThumbnail(`https://wow.zamimg.com/images/wow/icons/large/${r.icon}.jpg`);
-            //responseMsg.setURL(`https://classic.wowhead.com/item=${r.id}`);
+            let line = "";
+            r.forEach(e => {
+                responseMsg.setThumbnail(`https://wow.zamimg.com/images/wow/icons/large/${e.icon}.jpg`);
+                line += `${e.quantity}x on ${e.characters} | [Link](https://classic.wowhead.com/item=${e.id})\n`;
+            });
+            responseMsg.addField(`${r[0].name}`, line);
         });
         await message.channel.send(responseMsg);
     }

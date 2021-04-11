@@ -34,10 +34,10 @@ export class AccountRequest {
         this.httpClient = createHttpClient(account.apiToken);
     }
 
-    public async getItems(): Promise<ItemWithQuantity[]> {
+    public async getItems(): Promise<ItemWithQuantity[][]> {
         const characters = await this.getCharacters();
         const associations = this.getAltMainAssociations();
-        const itemsDictionary: { [id: string]: ItemWithQuantity } = {};
+        const itemsDictionary: { [id: string]: [ItemWithQuantity] } = {};
 
         characters.forEach(c => {
             c.bags.forEach(b => {
@@ -47,20 +47,17 @@ export class AccountRequest {
                         c.name + " (" + associations.get(c.name.toLowerCase()) + ")" : c.name
                     );
                     if (!itemsDictionary[bs.item.id]) {
-                        itemsDictionary[bs.item.id] = {...bs.item, quantity: bs.quantity, characters: name};
+                        itemsDictionary[bs.item.id] = [{...bs.item, quantity: bs.quantity, characters: name}]; //must start with an item
                     } else {
-                        itemsDictionary[bs.item.id].quantity += bs.quantity;
-                        if (!itemsDictionary[bs.item.id].characters.includes(name)) {
-                            itemsDictionary[bs.item.id].characters += `, ${name}`;
-                        }
+                        itemsDictionary[bs.item.id].push({...bs.item, quantity: bs.quantity, characters: name})
                     }
                 });
             });
         });
 
         return Object.keys(itemsDictionary)
-            .map(r => itemsDictionary[r])
-            .sort((a, b) => a.name.toLowerCase().localeCompare(b.name.toLowerCase()));
+            .map(r => [itemsDictionary][r])
+            .sort((a, b) => a[0].name.toLowerCase().localeCompare(b[0].name.toLowerCase()));
     }
 
     public getCharacters(): Promise<Character[]> {
