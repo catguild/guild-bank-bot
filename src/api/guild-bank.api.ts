@@ -43,6 +43,8 @@ export class AccountRequest {
         characters.forEach(c => {
             c.bags.forEach(b => {
                 b.bagSlots.forEach(bs => {
+                    console.log(c.name);
+                    console.log(associations.has(c.name));
                     const name = (
                         associations.has(c.name) ?
                         c.name + " (" + associations[c.name] + ")" : "jgjgjg"
