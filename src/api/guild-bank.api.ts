@@ -46,7 +46,7 @@ export class AccountRequest {
                     console.log(c.name);
                     console.log(associations.has(c.name));
                     const name = (
-                        associations.has(c.name) ?
+                        associations.has(c.name.toLowerCase()) ?
                         c.name + " (" + associations[c.name] + ")" : "jgjgjg"
                     );
                     if (!itemsDictionary[bs.item.id]) {
