@@ -82,7 +82,7 @@ export class AccountRequest {
 
     private getAltMainAssociations() {
         //const contents = fs.readFileSync("doc/alt_main_associations.txt").split('\n');
-        const contents = "nightfur:Arala\nnightscale:Arala\nnightraid:Khendi".split('\n');
+        const contents = "nightfur:Arala\nnightscale:Arala\nnightraid:Khendi\nslimecat:Palumyn/Erishne\nnightthyme:Dzeidzei\nspuffy:Arala\nsyen:Arala\nnightstone:Larm".split('\n');
         let associations = new Map();
         contents.forEach(a => {
             const pair = a.split(":");
