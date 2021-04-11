@@ -100,6 +100,7 @@ export class AccountRequest {
         let associations = new Map();
         contents.forEach(a => {
             const pair = a.split(":");
+            console.log(pair);
             associations.set(pair[0].toLowerCase(), pair[1]);
         });
         return associations;
