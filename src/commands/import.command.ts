@@ -23,7 +23,7 @@ export class ImportCommand extends BaseCommand {
       console.log("POSTED WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
       console.log(result);
 
-      await message.channel.send(result);
+      await message.channel.send("Imported. :goldstack:");
     }
 }
 
