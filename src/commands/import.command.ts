@@ -5,6 +5,7 @@ import { Account } from "../models/account";
 import { prefix } from "../util/constants";
 import { BaseCommand } from "./base.command";
 import { atob } from "atob";
+import { axios } from "axios";
 
 export class ImportCommand extends BaseCommand {
 
@@ -23,10 +24,15 @@ export class ImportCommand extends BaseCommand {
         let importString = args[0];
         if (args.length == 0) {
           console.log('DDDDDDDDDDDDDDDDD empty string found, look at url here')
+          const attachmentUrl = message.attachments.first().url;
           // let file = message.attachments.first().file;
           // fs.readFile(file, (err, data) => {
           //   importString = data;
           // })
+          let attachmentResponse = await axios.get(attachmentUrl);
+          console.log('GOT IMPORT STRING XXXXXXXXXXXXX');
+          console.log(attachmentResponse);
+          importString = attachmentResponse.body;
         }
         const decodedArray = atob(importString).split(";");
         const characterName = decodedArray[0].match(/(\w+)/)[0];
