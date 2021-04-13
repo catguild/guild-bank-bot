@@ -14,13 +14,17 @@ export class ImportCommand extends BaseCommand {
     public usage = `${prefix}${this.name} PASTED_IMPORT_STRING`
 
     public async action(message: Message, args: string[]) {
-
       console.log(`in import with args ${args}`);
       const importString = args[0];
+      const decodedArray[string] = atob(importString).split(";");
+      const characterName = decodedArray[0].test(/\[.+,/);
+      const numSlots = decodedArray.length - 2; // 0 is charname, 1 is list of bags
+      console.log(`for character ${characterName} with ${numSlots}`);
+
       const account = await this.getAccount();
       const result = await new ApiRequest().forAccount(account).postImportString(importString);
 
-      await message.channel.send("Imported.");
+      await message.channel.send(`Imported ${characterName}: ${numSlots} inventory slots.`);
     }
 }
 
