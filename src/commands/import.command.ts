@@ -18,8 +18,14 @@ export class ImportCommand extends BaseCommand {
       console.log('MESSAGE ATTACHMENT:');
       console.log(message.attachments);
       console.log('wwwwwwwwwwwwwww the first one is...');
-      console.log(message.attachments[0]);
-      const importString = args[0];
+      console.log(message.attachment);
+      let importString = args[0];
+      if (importString.length == 0) {
+        let file = message.attachments.first().file;
+        fs.readFile(file, (err, data) => {
+          importString = data;
+        })
+      }
       const decodedArray = atob(importString).split(";");
       const characterName = decodedArray[0].match(/(\w+)/)[0];
       const numSlots = decodedArray.length - 3; // 0 is charname, 1 is list of bags, -1 is empty string
