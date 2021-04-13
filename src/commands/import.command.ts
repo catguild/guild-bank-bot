@@ -32,7 +32,7 @@ export class ImportCommand extends BaseCommand {
           let attachmentResponse = await axios.get(attachmentUrl);
           console.log('GOT IMPORT STRING XXXXXXXXXXXXX');
           console.log(attachmentResponse);
-          importString = attachmentResponse.body;
+          importString = attachmentResponse.data;
         }
         const decodedArray = atob(importString).split(";");
         const characterName = decodedArray[0].match(/(\w+)/)[0];
