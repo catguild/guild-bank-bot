@@ -101,4 +101,9 @@ export class AccountRequest {
         });
         return associations;
     }
+
+    public async postImportString(): Promise<Character[]> {
+        const result = await this.httpClient.post(`/guild/UploadImportString/${this.account.classicGuildBankId}`);
+        return result;
+    }
 }
