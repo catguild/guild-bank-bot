@@ -17,23 +17,16 @@ export class ImportCommand extends BaseCommand {
 
     public async action(message: Message, args: string[]) {
       try {
-        console.log('MESSAGE ATTACHMENT:');
-        console.log(message.attachments);
-        console.log('wwwwwwwwwwwwwww the first ones url is...');
-        console.log(message.attachments.first().url);
         let importString = args[0];
+        
         if (args.length == 0) {
-          console.log('DDDDDDDDDDDDDDDDD empty string found, look at url here')
+          console.log('no arguments found. checking for url');
           const attachmentUrl = message.attachments.first().url;
-          // let file = message.attachments.first().file;
-          // fs.readFile(file, (err, data) => {
-          //   importString = data;
-          // })
+          console.log(attachmentUrl);
           let attachmentResponse = await axios.get(attachmentUrl);
-          console.log('GOT IMPORT STRING XXXXXXXXXXXXX');
-          console.log(attachmentResponse);
           importString = attachmentResponse.data;
         }
+
         const decodedArray = atob(importString).split(";");
         const characterName = decodedArray[0].match(/(\w+)/)[0];
         const numSlots = decodedArray.length - 3; // 0 is charname, 1 is list of bags, -1 is empty string
