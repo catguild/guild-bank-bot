@@ -5,7 +5,7 @@ import { Account } from "../models/account";
 import { prefix } from "../util/constants";
 import { BaseCommand } from "./base.command";
 import { atob } from "atob";
-import * as axios from "axios";
+import axios from "axios";
 
 export class ImportCommand extends BaseCommand {
 
