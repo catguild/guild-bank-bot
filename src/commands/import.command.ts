@@ -16,9 +16,9 @@ export class ImportCommand extends BaseCommand {
     public async action(message: Message, args: string[]) {
       console.log(`in import with args ${args}`);
       const importString = args[0];
-      const decodedArray[string] = atob(importString).split(";");
-      const characterName = decodedArray[0].test(/\[.+,/);
-      const numSlots = decodedArray.length - 2; // 0 is charname, 1 is list of bags
+      const decodedArray = atob(importString).split(";");
+      const characterName = decodedArray[0].match(/(\w+)/)[0];
+      const numSlots = decodedArray.length - 3; // 0 is charname, 1 is list of bags, -1 is empty string
       console.log(`for character ${characterName} with ${numSlots}`);
 
       const account = await this.getAccount();
