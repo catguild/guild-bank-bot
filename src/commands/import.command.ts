@@ -19,7 +19,7 @@ export class ImportCommand extends BaseCommand {
       const decodedArray = atob(importString).split(";");
       const characterName = decodedArray[0].match(/(\w+)/)[0];
       const numSlots = decodedArray.length - 3; // 0 is charname, 1 is list of bags, -1 is empty string
-      console.log(`for character ${characterName} with ${numSlots}`);
+      console.log(`about to import character ${characterName} with ${numSlots} slots`);
 
       const account = await this.getAccount();
       const result = await new ApiRequest().forAccount(account).postImportString(importString);
