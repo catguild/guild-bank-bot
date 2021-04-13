@@ -4,6 +4,7 @@ import { ApiRequest } from "../api/guild-bank.api";
 import { Account } from "../models/account";
 import { prefix } from "../util/constants";
 import { BaseCommand } from "./base.command";
+import { atob } from "atob";
 
 export class ImportCommand extends BaseCommand {
 
@@ -14,7 +15,6 @@ export class ImportCommand extends BaseCommand {
     public usage = `${prefix}${this.name} PASTED_IMPORT_STRING`
 
     public async action(message: Message, args: string[]) {
-      console.log(`in import with args ${args}`);
       const importString = args[0];
       const decodedArray = atob(importString).split(";");
       const characterName = decodedArray[0].match(/(\w+)/)[0];
