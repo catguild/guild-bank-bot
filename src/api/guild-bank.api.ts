@@ -102,7 +102,7 @@ export class AccountRequest {
         return associations;
     }
 
-    public async postImportString(importString: string): Promise<string> {
+    public async postImportString(importString: string): Promise<any> {
         const result = await this.httpClient.post(`/guild/UploadImportString/${this.account.classicGuildBankId}`, { EncodedImportString : importString});
         return result;
     }
