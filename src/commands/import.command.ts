@@ -38,7 +38,8 @@ export class ImportCommand extends BaseCommand {
 
         await message.channel.send(`Imported ${characterName}: ${numSlots} inventory slots.`);
       } catch(error) {
-        await message.channel.set(`Error! ${error}`);
+        console.error(error);
+        await message.channel.send(`Error! ${error}`);
       }
     }
 }
