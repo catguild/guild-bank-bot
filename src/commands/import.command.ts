@@ -17,14 +17,15 @@ export class ImportCommand extends BaseCommand {
     public async action(message: Message, args: string[]) {
       console.log('MESSAGE ATTACHMENT:');
       console.log(message.attachments);
-      console.log('wwwwwwwwwwwwwww the first one is...');
-      console.log(message.attachment);
+      console.log('wwwwwwwwwwwwwww the first ones url is...');
+      console.log(message.attachments.first().url);
       let importString = args[0];
       if (importString.length == 0) {
-        let file = message.attachments.first().file;
-        fs.readFile(file, (err, data) => {
-          importString = data;
-        })
+        console.log('DDDDDDDDDDDDDDDDD empty string found, look at url here')
+        // let file = message.attachments.first().file;
+        // fs.readFile(file, (err, data) => {
+        //   importString = data;
+        // })
       }
       const decodedArray = atob(importString).split(";");
       const characterName = decodedArray[0].match(/(\w+)/)[0];
