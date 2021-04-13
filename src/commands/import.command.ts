@@ -14,14 +14,16 @@ export class ImportCommand extends BaseCommand {
     public usage = `${prefix}${this.name} PASTED_IMPORT_STRING`
 
     public async action(message: Message, args: string[]) {
-        const importString = args[0];
-        const account = await this.getAccount();
-        const result = await new ApiRequest().forAccount(account).postImportString(importString);
 
-        console.log("POSTED WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
-        console.log(result);
+      console.log(`in import with args ${args}`);
+      const importString = args[0];
+      const account = await this.getAccount();
+      const result = await new ApiRequest().forAccount(account).postImportString(importString);
 
-        await message.channel.send(result);
+      console.log("POSTED WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
+      console.log(result);
+
+      await message.channel.send(result);
     }
 }
 
