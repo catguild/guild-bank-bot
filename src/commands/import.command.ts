@@ -15,8 +15,10 @@ export class ImportCommand extends BaseCommand {
     public usage = `${prefix}${this.name} PASTED_IMPORT_STRING`
 
     public async action(message: Message, args: string[]) {
-      console.log('MESSAGE WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW');
-      console.log(message);
+      console.log('MESSAGE ATTACHMENT:');
+      console.log(message.attachments);
+      console.log('wwwwwwwwwwwwwww the first one is...');
+      console.log(message.attachments[0]);
       const importString = args[0];
       const decodedArray = atob(importString).split(";");
       const characterName = decodedArray[0].match(/(\w+)/)[0];
