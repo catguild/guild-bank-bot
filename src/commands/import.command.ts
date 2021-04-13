@@ -20,10 +20,7 @@ export class ImportCommand extends BaseCommand {
       const account = await this.getAccount();
       const result = await new ApiRequest().forAccount(account).postImportString(importString);
 
-      console.log("POSTED WWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWWW");
-      console.log(result);
-
-      await message.channel.send("Imported. :goldstack:");
+      await message.channel.send("Imported.");
     }
 }
 
