@@ -5,7 +5,10 @@ const baseUrl = "https://classicguildbank-apim.azure-api.net/api";
 export const createHttpClient = (apiToken: string = null): AxiosInstance => {
     let headers = {};
     if (apiToken) {
-        headers = {"Authorization": `Bearer ${apiToken}`}
+        headers = {
+            "Authorization": `Bearer ${apiToken}`, 
+            'Content-Type': 'application/json',
+        }
     }
     const client = axios.create({baseURL: baseUrl, headers});
     client.interceptors.request.use(request => {

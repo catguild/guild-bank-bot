@@ -30,7 +30,7 @@ export const createDiscordClient = async () => {
                 console.log(`Execute: ${commandHandler.name} with args "${args}"`);
                 await commandHandler.execute(msg, args);
             } else if (args) {
-                console.log(`No command, using search.`);
+                console.log(`No command, using search with args "${args}"`);
                 client.commands.get("search").execute(msg, args);
             } else {
                 console.log(`Command: ${command} not found, display help.`);
