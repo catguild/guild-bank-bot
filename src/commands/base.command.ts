@@ -16,22 +16,27 @@ export abstract class BaseCommand {
     protected getAccountOrNull: () => Promise<Account>;
 
     public async execute(message: Message, args: string[]): Promise<void> {
-        this.getAccountOrNull = async () => await Account.findByDiscordId(message.guild.id);
-        this.getAccount = async () => {
-            const account = await this.getAccountOrNull();
-            if (!account) {
-                message.reply("No guild bank configured on this discord server. Run `setGuild` or `setToken` to configure a classic guild bank account.")
-                throw new Error("Guild Bank not configured yet");
+        try {
+            this.getAccountOrNull = async () => await Account.findByDiscordId(message.guild.id);
+            this.getAccount = async () => {
+                const account = await this.getAccountOrNull();
+                if (!account) {
+                    message.reply("No guild bank configured on this discord server. Run `setGuild` or `setToken` to configure a classic guild bank account.")
+                    throw new Error("Guild Bank not configured yet");
+                }
+                return account;
             }
-            return account;
-        }
 
-        if ((await this.hasPermission(message.member)) === false) {
-            message.reply("Sorry, permission denied. You need to be an officer to do this")
-            return;
-        }
+            if ((await this.hasPermission(message.member)) === false) {
+                message.reply("Sorry, permission denied. You need to be an officer to do this")
+                return;
+            }
 
-        await this.action(message, args);
+            await this.action(message, args);
+        } catch (e) {
+            console.error(e);
+            message.reply(`${e}`);
+        }
     }
 
     private async hasPermission(member: GuildMember): Promise<boolean> {
