@@ -7,7 +7,7 @@ export class SetTokenCommand extends BaseCommand {
 
     public name = 'setToken';
 
-    public description = 'Setup a private classic guild bank account: `!gb:setToken API_TOKEN`';
+    public description = 'Setup a private classic guild bank account: `${prefix}setToken API_TOKEN`';
     
     public officerOnly = true;
 
@@ -26,7 +26,7 @@ export class SetTokenCommand extends BaseCommand {
 
         await account.save();
         await message.delete();
-        await message.channel.send("Guild Bank configured: type `!gb:help` to see list of commands.\nHappy raiding :)");
+        await message.channel.send("Guild Bank configured: type `${prefix}help` to see list of commands.\nHappy raiding :)");
     }
 };
 

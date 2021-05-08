@@ -27,7 +27,7 @@ export abstract class BaseCommand {
         }
 
         if ((await this.hasPermission(message.member)) === false) {
-            message.reply("sry permission denied. You need to be an offizer to do this")
+            message.reply("Sorry, permission denied. You need to be an officer to do this")
             return;
         }
 

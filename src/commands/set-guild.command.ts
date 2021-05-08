@@ -14,7 +14,7 @@ export class SetGuildCommand extends BaseCommand {
     public async action(message: Message, args: string[]) {
         const guildId = args[0];
         if (!guildId) {
-            await message.reply("No Guild Id provided, please provide a valid Guild Id: `!gb:setGuild YOUR_GUILD_ID`");
+            await message.reply("No Guild Id provided, please provide a valid Guild Id: `${prefix}setGuild YOUR_GUILD_ID`");
             return;
         }
         const account = new Account();
@@ -24,6 +24,6 @@ export class SetGuildCommand extends BaseCommand {
 
         await account.save();
         await message.delete();
-        await message.channel.send("Guild Bank configured: type '!gb:help' to see list of commands.\nHappy raiding :)");
+        await message.channel.send(`Guild Bank configured: type '${prefix}help' to see list of commands.\nHappy raiding :)`);
     }
 };

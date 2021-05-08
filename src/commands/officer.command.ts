@@ -14,7 +14,7 @@ export class OfficerCommand extends BaseCommand {
     async action(message: Message, args: string[]) {
         const roleTag = args[0];
         if (!roleTag) {
-            await message.reply("No role provided, please provide a valid role: `!gb:offizer YOUR_OFFICER_ROLE`");
+            await message.reply("No role provided, please provide a valid role: `${prefix}officer YOUR_OFFICER_ROLE`");
             return;
         }
 
